@@ -18,17 +18,31 @@ build:
 # run container: train + predict (interactive mode, since predict requires user input)
 run:
 	@echo "🚀 Running container..."
-	docker run -it --rm --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -it --rm \
+		-v $(PWD):/app \
+		--name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # only run training
 train:
-	docker run --rm --name $(CONTAINER_NAME) $(IMAGE_NAME) \
-		python3 train.py
+	docker run --rm \
+		-v $(PWD):/app \
+		--name $(CONTAINER_NAME) $(IMAGE_NAME) \
+			python3 train.py
 
 # only run prediction (requires interaction)
 predict:
-	docker run -it --rm --name $(CONTAINER_NAME) $(IMAGE_NAME) \
-		python3 predict.py
+	docker run -it --rm \
+		-v $(PWD):/app \
+		--name $(CONTAINER_NAME) $(IMAGE_NAME) \
+			python3 predict.py
+
+# bonus
+bonus:
+	docker run -it --rm \
+		-v $(PWD):/app \
+		--name $(CONTAINER_NAME) $(IMAGE_NAME) \
+			python3 bonus.py
+
 
 # ─────────────────────────────────────
 # cleanup commands
@@ -54,4 +68,4 @@ fclean: clean
 re: fclean all
 
 # declare phony targets (not corresponding to real files)
-.PHONY: all build run train predict stop clean fclean re
+.PHONY: all build run train predict bonus stop clean fclean re

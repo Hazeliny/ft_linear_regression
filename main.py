@@ -1,3 +1,5 @@
+import math
+
 from train import (
     load_data,
     normalize,
@@ -10,6 +12,12 @@ from predict import (
     load_thetas,
     estimate_price,
     get_mileage_from_user
+)
+
+from bonus import (
+    calculate_r2,
+    calculate_mse,
+    plot
 )
 
 def main():
@@ -65,7 +73,24 @@ def main():
     else:
         print(f"\n💰 Estimated price for {mileage:.0f} km : {price:.2f} €")
 
+    # ─────────────────────────────────────
+    # PART 3 : BONUS
+    # ─────────────────────────────────────
     print("\n" + "=" * 40)
+    print("\n📊 STEP 3 : Bonus - Precision & Plot\n")
+
+    r2 = calculate_r2(mileages, prices, theta0, theta1)
+    mse = calculate_mse(mileages, prices, theta0, theta1)
+
+    print(f"   R²   = {r2:.4f}  (1.0 = perfect / 0.0 = no correlation)")
+    print(f"   MSE  = {mse:.2f} €²")
+    print(f"   RMSE = {math.sqrt(mse):.2f} €")
+
+    plot(mileages, prices, theta0, theta1, r2)
+
+    print("\n" + "=" * 40)
+
+
 
 if __name__ == "__main__":
     main()
