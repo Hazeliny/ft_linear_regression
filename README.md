@@ -73,18 +73,18 @@ tmp_θ1 = learningRate × (1/m) × Σ (estimatePrice(mileage[i]) − price[i]) �
 4. Denormalize θ back to real-world scale
 5. Save θ0 and θ1 to thetas.json
 
-## Prediction (predict.py)
+### Prediction (predict.py)
 
 Prompts the user for a mileage and returns the estimated price using saved θ values. Defaults to θ0 = θ1 = 0 if not yet trained.
 
-## Bonus (bonus.py)
+### Bonus (bonus.py)
 
 - R² — how well mileage explains price variation (closer to 1.0 = better)
 - MSE — mean squared error in €²
 - RMSE — average prediction error in €
 - Plot — scatter plot of real data + regression line, saved as result.png
 
-## Example Output
+### Example Output
 
 ```
 🚗 Enter mileage (km): 80000
@@ -96,7 +96,7 @@ Prompts the user for a mileage and returns the estimated price using saved θ va
    RMSE = 667.63 €
 ```
 
-### Rules
+## Rules
 
 - No libraries that do the regression work (e.g. numpy.polyfit, sklearn are forbidden)
 - Gradient descent implemented from scratch
